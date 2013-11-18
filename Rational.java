@@ -36,11 +36,51 @@ public class Rational{
 	numerator *= a.denominator;
 	denominator *= a.numerator;
     }
+    
+    public void add(Rational a){
+	if (denominator == a.denominator)
+	    numerator += a.numerator;
+	else{
+	    numerator = (numerator * a.denominator) + (a.numerator * denominator);
+	    denominator *= a.denominator;
+	}
+    }
+
+    public void subtract(Rational a){
+	Rational temp = new Rational(a.numerator*-1, a.denominator);
+	add(temp);
+    }
+
+    public int gcd(){
+	int a = Math.max(numerator, denominator);
+	int b = Math.min(numerator, denominator);
+	while (a%b != 0) {
+	    int c = b;
+	    b = a % b;
+	    a = c;
+	}
+	return b;
+    }
+
+    public void reduce(){
+	if (gcd() > 1){
+	    int a = gcd();
+	    numerator /= a;
+	    denominator /= a;
+	}
+    }
+	
+    
 
     public static void main(String[] args){
-	/*       
+
 	Rational a = new Rational(3, 4);
 	Rational b = new Rational(1, 2);
+	
+	a.subtract( b);
+	a.reduce();
+	System.out.println(a);
+	/*       
 	System.out.println(a);
 	System.out.println(b);
 	
