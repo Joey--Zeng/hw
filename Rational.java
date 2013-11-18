@@ -69,17 +69,31 @@ public class Rational{
 	    denominator /= a;
 	}
     }
-	
     
 
+    public static int gcd(int a, int b){
+	if (b > a)
+	    return gcd(b,a);
+	else if (a%b != 0)
+	    return gcd(b, a%b);
+	else 
+	    return b;
+    }
+
+    public int compareTo( Rational a){
+	subtract(a);
+	int ret = numerator;
+	add(a);
+	reduce();
+	return ret;
+    }
+	    
     public static void main(String[] args){
 
-	Rational a = new Rational(3, 4);
+	Rational a = new Rational(2, 4);
 	Rational b = new Rational(1, 2);
+
 	
-	a.subtract( b);
-	a.reduce();
-	System.out.println(a);
 	/*       
 	System.out.println(a);
 	System.out.println(b);
